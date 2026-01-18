@@ -21,21 +21,21 @@ class LinearRegressionClosed:
     def __init__(self):
         self.coef_ = None
         self.intercept_ = None
+
     def fit(self, X, y):
-    X = np.asarray(X, float)
-    y = np.asarray(y, float).reshape(-1, 1)
+        X = np.asarray(X, float)
+        y = np.asarray(y, float).reshape(-1, 1)
 
-    Xb = np.c_[np.ones((X.shape[0], 1)), X]
-    beta = np.linalg.solve(Xb.T @ Xb, Xb.T @ y) 
+        Xb = np.c_[np.ones((X.shape[0], 1)), X]
+        beta = np.linalg.solve(Xb.T @ Xb, Xb.T @ y)  # (p+1, 1)
 
-    self.intercept_ = beta[0, 0]           # <- scalar
-    self.coef_ = beta[1:, 0]               # <- 1D array
-
+        self.intercept_ = float(beta[0, 0])
+        self.coef_ = beta[1:, 0]  # 1D array
 
     def predict(self, X):
-        X = np.array(X)
-
+        X = np.asarray(X, float)
         return X @ self.coef_ + self.intercept_
+
 
 
 reg = LinearRegressionClosed()
