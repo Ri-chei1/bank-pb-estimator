@@ -179,7 +179,7 @@ with tab2:
     else:
         log_assets = float(np.log(assets))
         x_new = np.array([[roe, log_assets, eq_ratio]])
-        pred_log_pb = float(reg.predict(x_new))
+        pred_log_pb = reg.predict(x_new)[0]
         pred_pb = float(np.exp(pred_log_pb))
         st.success(f"Estimated P/B (as-of {PB_ASOF_DATE}) ≈ **{pred_pb:.2f}**")
 
