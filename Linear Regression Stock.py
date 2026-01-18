@@ -22,12 +22,15 @@ class LinearRegressionClosed:
         self.coef_ = None
         self.intercept_ = None
     def fit(self, X, y):
-        X = np.array(X)
-        y = np.array(y)
-        Xb = np.c_[np.ones((X.shape[0], 1)), X]
-        beta = np.linalg.inv(Xb.T @ Xb) @ (Xb.T) @ y
-        self.intercept_ = beta[0]
-        self.coef_ = beta[1:]
+    X = np.asarray(X, float)
+    y = np.asarray(y, float).reshape(-1, 1)
+
+    Xb = np.c_[np.ones((X.shape[0], 1)), X]
+    beta = np.linalg.solve(Xb.T @ Xb, Xb.T @ y) 
+
+    self.intercept_ = beta[0, 0]           # <- scalar
+    self.coef_ = beta[1:, 0]               # <- 1D array
+
 
     def predict(self, X):
         X = np.array(X)
