@@ -2,6 +2,12 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+with st.expander("Data sources"):
+    st.write(
+        "FY2024 fundamentals and P/B ratios were collected from StockAnalysis (StockAnalysis.com). "
+        "P/B values reflect the collection date used in the dataset."
+    )
+
 st.set_page_config(page_title="Bank P/B Estimator", layout="wide")
 st.title("Bank P/B Estimator (Linear Regression)")
 
