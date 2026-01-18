@@ -123,7 +123,7 @@ with tab1:
     row = df[df["Ticker"] == ticker].iloc[0]
 
     x_row = np.array([[row["ROE"], row["Log_Assets"], row["eq_ratio"]]])
-    pred_log_pb = float(reg.predict(x_row))
+    pred_log_pb = reg.predict(x_row)[0]
     pred_pb = float(np.exp(pred_log_pb))
 
     actual_pb = float(np.exp(row["Log_pb"]))
