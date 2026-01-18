@@ -27,10 +27,11 @@ class LinearRegressionClosed:
         X = np.asarray(X, float)
         y = np.asarray(y, float).reshape(-1, 1)
 
-        Xb = np.c_[np.ones((X.shape[0], 1)), X]  # add intercept column
-        beta = np.linalg.solve(Xb.T @ Xb, Xb.T @ y)  # stable
-        self.intercept_ = float(beta[0])
-        self.coef_ = beta[1:].flatten()
+        Xb = np.c_[np.ones((X.shape[0], 1)), X]
+        beta = np.linalg.solve(Xb.T @ Xb, Xb.T @ y)  # (p+1, 1)
+
+        self.intercept_ = float(beta[0, 0])
+        self.coef_ = beta[1:, 0]  # 1D array
 
     def predict(self, X):
         X = np.asarray(X, float)
